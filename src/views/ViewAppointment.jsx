@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import Nav from "../components/Nav";
 import UpdateBookForm from "../components/UpdateBookForm";
 import axios from "axios";
@@ -8,7 +8,7 @@ function ViewAppointment(props) {
   const [showModalEdit, setShowModalEdit] = useState(false);
   const [bookingUpdatingData,setBookingUpdatingData] = useState({});
   // const [userReferenceId,setUserReferenceId]=useState(JSON.parse(localStorage.getItem("reference")));
-
+  const [updatingId,setUpdatingId]=useState(null);
   const userReferenceRef = useRef("");
 
   const months = [
@@ -54,14 +54,17 @@ function ViewAppointment(props) {
 
   const editBookingHandler = (bookingId) => {
     props.editBooking(bookingId);
+    setUpdatingId(bookingId);
     // console.log(bookingId);
     setShowModalEdit(true);
-    axios.get('http://localhost/php%20projects/Briefs/frontend_dental-appointment/backend/public/appointment/getAppointment/'+bookingId).then(response => {
+    axios.get('http://localhost/php%20projects/Briefs/brief-appointment/manage_appointments/backend/public/appointment/getAppointment/'+bookingId).then(response => {
       console.log(response.data);
       // console.log(response.data);
       if (response.statusText === 'OK') {
         // console.log('this data : '+response.data);
         setBookingUpdatingData(response.data[0]);
+        // setBookingUpdatingDate(response.data['slot_date'])
+        console.log(response.data);
         // setUserRegistered(true);
       }
       
@@ -77,6 +80,12 @@ function ViewAppointment(props) {
     props.deleteBooking(bookingId);
     // console.log(bookingId);
   };
+
+  const closeModalEditHandler = (e) => {
+    // console.log(e);
+    setShowModalEdit(!e);
+  };
+
 
   return (
     <section className="text-gray-600 body-font">
@@ -203,7 +212,7 @@ function ViewAppointment(props) {
                   <h3 className="text-xl mb-7 font-medium text-gray-900 ">
                     Postpone Appointment
                   </h3>
-                  <UpdateBookForm onSaveReceivingDataBook={bookingUpdatingData}/>
+                  <UpdateBookForm onSaveReceivingDataBook={bookingUpdatingData} id={updatingId} onCancelModal={closeModalEditHandler} />
                 </div>
               </div>
             </div>

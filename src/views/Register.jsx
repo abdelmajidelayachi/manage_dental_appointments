@@ -216,7 +216,7 @@ const Register = (props) => {
             <img
               alt="e-commerce"
               className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
-              src="http://localhost/php%20projects/Briefs/frontend_dental-appointment/backend/public/assets/images/undraw_medicine.svg"
+              src="http://localhost/php%20projects/Briefs/brief-appointment/manage_appointments/backend/public/assets/images/undraw_medicine.svg"
             />
           </div>
         </div>

@@ -1,26 +1,50 @@
 import React from 'react'
-import { useState, useRef } from 'react';
+import { useState } from 'react';
+import axios from 'axios';
 
 const UpdateBookForm=(props)=> {
-  const timeRef = useRef(""); 
-  const referenceRef = useRef(props.onSaveReceivingDataBook.reference);
-  const subjectRef = useRef(props.onSaveReceivingDataBook.subject); 
-
+  
   const [date,setDate]=useState(props.onSaveReceivingDataBook.slot_date);
-  const [time,setTime]=useState(props.onSaveReceivingDataBook.slot_time);
+  const [time,setTime]=useState(props.onSaveDate);
+  const [availableTime,setAvailableTime]=useState({});
   const [subject,setSubject]=useState(props.onSaveReceivingDataBook.subject);
   const [emptyDate,setEmptyDate]=useState(false);
   const [emptyTime,setEmptyTime]=useState(false);
-  const [emptyReference,setEmptyReference]=useState(false);
+  // const [emptyReference,setEmptyReference]=useState(false);
   const [emptySubject,setEmptySubject]=useState(false);
+  const [timeExist,setTimeExist]=useState(false);
+  const [cancelModal,setCancelModal]=useState(false);
 
   const dateChangeHandler = (e) => {
-    e.preventDefault();
+   
     const date = e.target.value;
     // props.onSaveDataDate(date);
     setDate(date);
+    const formData = new FormData();
+    formData.append('date', date);
+
     console.log(date);
+    axios.post('http://localhost/php%20projects/Briefs/brief-appointment/manage_appointments/backend/public/appointment/getAllSlots', formData).then(response => {
+      // console.log(response);
+      // console.log(response.data);
+      if (response.statusText === 'OK') {
+        // console.log(response.data);
+        setAvailableTime(response.data);
+        setTimeExist(true);
+        // setUserRegistered(true);
+      }
+      
+    }  
+    ).catch(error => {
+      console.log(error);
+    }
+      )
+  
+    // console.log(date);
   };
+
+  props.onCancelModal(cancelModal);
+  
   const timeChangeHandler = (e) => {
     const time = e.target.value;
     setTime(time);
@@ -31,8 +55,13 @@ const UpdateBookForm=(props)=> {
     setSubject(subject);
   };
     
+  // useEffect(()=>
+  // {
+  //   setDate(props.onSaveReceivingDataBook.slot_date);
+    
+  // })
   
-  
+  // console.log(props.timeAvailable);
 
   var today = new Date();
   var dd = today.getDate();
@@ -50,11 +79,62 @@ const UpdateBookForm=(props)=> {
       
   var maxDate = yyyy + '-' + mm + '-' + ddMax;
   var minDate = yyyy + '-' + mm + '-' + dd;
-  
-  const onSubmitUpdateBookingData = (e) => {
+  // console.log(props.id);
+  const onSubmitUpdateBookingData = async (e) => {
     e.preventDefault();
-  };
 
+    if(date==='')
+    {
+      setEmptyDate(true);
+      
+    }else{
+      setEmptyDate(false);
+    }
+    if(time==='Select Time' || time===undefined)
+    {
+      console.log('time is empty');
+        setEmptyTime(true);
+    }else
+    {
+      setEmptyTime(false);
+    }
+    if(subject.trim()==='')
+    {
+      setEmptySubject(true);
+    }
+    else{
+      setEmptySubject(false);
+    }
+
+    if(!(time==='Select Time' || time===undefined) && !(subject.trim()==='') && !(date===''))
+    {
+
+    const formData = new FormData();
+    formData.append('date', date);
+    formData.append('time', time);
+    formData.append('reference', props.onSaveReceivingDataBook.reference);
+    formData.append('subject', subject);
+    formData.append('id', props.id);
+  
+
+    
+    axios.post('http://localhost/php%20projects/Briefs/brief-appointment/manage_appointments/backend/public/appointment/update', formData).then(response => {
+      // console.log(response);
+      console.log(response.data);
+      if (response.statusText === 'OK') {
+        console.log(response.data);
+        setCancelModal(true);
+        // setUserRegistered(true);
+      }
+      
+    }  
+    ).catch(error => {
+      console.log(error);
+    }
+      )
+  }
+};
+// console.log(availableTime);
 
   return (
     <form  onSubmit={onSubmitUpdateBookingData}
@@ -94,16 +174,17 @@ const UpdateBookForm=(props)=> {
           className="bg-gray-50 border border-cyan-500 text-gray-900 text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-full p-2.5 pl-10 py-2.5 shadow-inner focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 focus:shadow-inner"
         >
           <option>Select Time</option>
-          <option>{props.onSaveReceivingDataBook.slot_time}</option>
-          {/* {props.timeAvailable &&
-            props.timeAvailable.map((time,index)=>{
+          {/* <option>{props.onSaveReceivingDataBook.slot_time}</option> */}
+          {timeExist 
+          &&
+            availableTime.map((time,index)=>{
               if(time['slot_status']===1){
                 return 0;
               }
               return(
-                <option key={index}>{time['slot_time']}</option>
+                <option key={index}>{time.slot_time}</option>
               )
-            }) */
+            }) 
           }
          
         </select>
@@ -130,9 +211,15 @@ const UpdateBookForm=(props)=> {
 
     <button
       type="submit"
-      className="text-white bg-cyan-500 px-12  hover:bg-cyan-600 focus:ring-4 focus:outline-none focus:ring-cyan-400 font-medium rounded-full text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+      className="text-white bg-cyan-500 px-10 mr-2  hover:bg-cyan-600 focus:ring-4 focus:outline-none focus:ring-cyan-400 font-medium rounded-full text-sm w-full sm:w-auto px-5 py-2.5 text-center"
     >
       Update
+    </button>
+    <button
+      type="button" onClick={()=>{setCancelModal(true)}}
+      className="text-white bg-red-500 px-10  hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-400 font-medium rounded-full text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+    >
+      cancel
     </button>
   </form>
 

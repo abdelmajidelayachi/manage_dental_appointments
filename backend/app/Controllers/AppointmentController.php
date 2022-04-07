@@ -88,6 +88,55 @@ class AppointmentController
       $json = json_encode($app);
       echo $json;
   }
+
+  public function update()
+  {
+    $date = $_POST['date'];
+    // echo $date;
+    $timeBook = $_POST['time'];
+    // echo $timeBook;
+    $reference = $_POST['reference'];
+    // echo $reference;
+
+    $subject = $_POST['subject'];
+    $idUpdated = $_POST['id'];
+    // echo $subject;
+    // exit();
+    
+    $data=array('slot_time'=>$timeBook,'slot_date'=>$date);
+
+    
+    $slot = new Slot();
+    $isAvailable = $slot->isAvailable($data);
+    // $reference = bin2hex($reference);
+    
+
+    // var_dump($isAvailable);
+    // echo $isAvailable['id'];
+    // echo '<br>';
+  
+    
+    if($isAvailable[0]>0){
+        if($isAvailable['slot_status']===0){ 
+        $slot->bookAppointment($isAvailable[0]);
+        $data = array('slot_id'=>$isAvailable['id'],'user_reference'=>$reference,'subject'=>$subject);
+        // var_dump($data);
+        $appointment = new Appointment();
+        $slotId= $appointment->getRow($idUpdated);
+        $slotId = $slotId['slot_id'];
+        // echo $slotId;
+        $slot->cancelBook($slotId);
+        $appointment->updateAppointment($data,$idUpdated);
+
+      
+        }else{
+            echo 'booked';
+        }
+
+    }else{
+        echo 'notAvailable';
+    }
+  }
  
 
 }

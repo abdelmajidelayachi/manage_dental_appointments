@@ -41,7 +41,7 @@ const Home = () => {
       </div>
     </div>
     <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-      <img className="object-cover object-center rounded-b-full" alt="hero" src="http://localhost/php%20projects/Briefs/backend_dental-appointment/public/assets/images/header_img.jpg"/>
+      <img className="object-cover object-center rounded-b-full" alt="hero" src="http://localhost/php%20projects/Briefs/brief-appointment/manage_appointments/backend/public/assets/images/header_img.jpg"/>
     </div>
   </div>
 </section>

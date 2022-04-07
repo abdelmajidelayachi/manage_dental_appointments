@@ -49,6 +49,13 @@ class Appointment extends DB
       $tmp=$this->conn->prepare('DELETE FROM `'.$this->table.'` WHERE id_app='.$id);
       return $tmp->execute();
     }
+    public function updateAppointment($data,$id){
+      $tmp=$this->conn->prepare('UPDATE `'.$this->table.'` SET user_reference=:user_reference,slot_id=:slot_id,subject=:subject WHERE id_app='.$id);
+      $tmp->bindParam(':user_reference',$data['user_reference']);
+      $tmp->bindParam(':slot_id',$data['slot_id']);
+      $tmp->bindParam(':subject',$data['subject']);
+      return $tmp->execute();
+    }
 
   }
   
