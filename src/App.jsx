@@ -52,7 +52,7 @@ function App() {
       console.log(response.data);
       // console.log(response.data);
       if (response.statusText === 'OK') {
-        // console.log('this data : '+response.data);
+        console.log('this data : '+response.data);
         setBookingData(response.data);
         // setUserRegistered(true);
       }

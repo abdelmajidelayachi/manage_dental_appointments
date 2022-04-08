@@ -100,6 +100,8 @@ class AppointmentController
 
     $subject = $_POST['subject'];
     $idUpdated = $_POST['id'];
+
+
     // echo $subject;
     // exit();
     

@@ -80,7 +80,7 @@ const UpdateBookForm=(props)=> {
   var maxDate = yyyy + '-' + mm + '-' + ddMax;
   var minDate = yyyy + '-' + mm + '-' + dd;
   // console.log(props.id);
-  const onSubmitUpdateBookingData = async (e) => {
+  const onSubmitUpdateBookingData =  (e) => {
     e.preventDefault();
 
     if(date==='')
@@ -115,7 +115,7 @@ const UpdateBookForm=(props)=> {
     formData.append('reference', props.onSaveReceivingDataBook.reference);
     formData.append('subject', subject);
     formData.append('id', props.id);
-  
+    console.log(props.onSaveReceivingDataBook.reference);
 
     
     axios.post('http://localhost/php%20projects/Briefs/brief-appointment/manage_appointments/backend/public/appointment/update', formData).then(response => {

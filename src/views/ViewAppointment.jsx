@@ -7,10 +7,9 @@ function ViewAppointment(props) {
   const [bookingData, setBookingData] = useState([]);
   const [showModalEdit, setShowModalEdit] = useState(false);
   const [bookingUpdatingData,setBookingUpdatingData] = useState({});
-  // const [userReferenceId,setUserReferenceId]=useState(JSON.parse(localStorage.getItem("reference")));
   const [updatingId,setUpdatingId]=useState(null);
   const userReferenceRef = useRef("");
-
+  
   const months = [
     "January",
     "February",
@@ -35,54 +34,44 @@ function ViewAppointment(props) {
     "Saturday",
   ];
 
-  // const onSubmitUserReferenceHandler = ((e) => {
-  //   e.preventDefault();
-  //   const userReference = userReferenceRef.current.value;
-  //   props.reference(userReference);
-  //   setBookingData(props.BookingData);
-  //   // console.log(bookingData);
-
-  // });
+  
   const showUserReferenceHandler = () => {
     const userReference = userReferenceRef.current.value;
     props.reference(userReference);
     setBookingData(props.BookingData);
-    // console.log(bookingData);
+    console.log(bookingData);
   };
 
   console.log(bookingData);
 
-  const editBookingHandler = (bookingId) => {
-    props.editBooking(bookingId);
-    setUpdatingId(bookingId);
+    function editBookingHandler (bookingId) {
     // console.log(bookingId);
-    setShowModalEdit(true);
-    axios.get('http://localhost/php%20projects/Briefs/brief-appointment/manage_appointments/backend/public/appointment/getAppointment/'+bookingId).then(response => {
-      console.log(response.data);
-      // console.log(response.data);
-      if (response.statusText === 'OK') {
-        // console.log('this data : '+response.data);
-        setBookingUpdatingData(response.data[0]);
-        // setBookingUpdatingDate(response.data['slot_date'])
-        console.log(response.data);
-        // setUserRegistered(true);
-      }
-      
-    }  
-    ).catch(error => {
-      console.log(error);
-    }
-      )
-  };
+    
 
-  // console.log(bookingUpdatingData);
+      props.editBooking(bookingId);
+    setUpdatingId(bookingId);
+    setShowModalEdit(true);
+    
+
+
+   axios.get('http://localhost/php%20projects/Briefs/brief-appointment/manage_appointments/backend/public/appointment/getAppointment/'+bookingId).then((response)=>{
+    if (response.statusText === 'OK') {
+      // console.log('this data : '+response.data);
+      setBookingUpdatingData(response.data[0]);
+      //
+    }
+  
+    
+  }).catch(error => {
+    console.log(error);
+  });
+}
+
   const deleteBookingHandler = (bookingId) => {
     props.deleteBooking(bookingId);
-    // console.log(bookingId);
   };
 
   const closeModalEditHandler = (e) => {
-    // console.log(e);
     setShowModalEdit(!e);
   };
 
@@ -212,7 +201,7 @@ function ViewAppointment(props) {
                   <h3 className="text-xl mb-7 font-medium text-gray-900 ">
                     Postpone Appointment
                   </h3>
-                  <UpdateBookForm onSaveReceivingDataBook={bookingUpdatingData} id={updatingId} onCancelModal={closeModalEditHandler} />
+                  <UpdateBookForm onSaveReceivingDataBook={bookingUpdatingData} id={updatingId} onCancelModal={closeModalEditHandler} onUpdateBookingData={(data)=> setBookingData(data)} />
                 </div>
               </div>
             </div>
