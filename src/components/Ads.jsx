@@ -1,4 +1,5 @@
 import React from "react";
+import ads from '../assets/images/child.jpg'
 
 function Ads() {
   return (
@@ -8,7 +9,7 @@ function Ads() {
           <img
             alt="ecommerce"
             className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
-            src="http://localhost/php%20projects/Briefs/backend_dental-appointment/public/assets/images/child.jpg"
+            src={ads}
           />
           <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
             <h2 className="text-2xl font-medium title-font text-gray-900 mb-1 text-sm">

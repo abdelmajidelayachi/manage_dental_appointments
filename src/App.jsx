@@ -27,7 +27,7 @@ function App() {
   
 
     console.log(userData);
-    axios.post('http://localhost/php%20projects/Briefs/brief-appointment/manage_appointments/backend/public/user/register', formData).then(response => {
+    axios.post('http://localhost/php%20projects/react/manage_dental_appointments/backend/public/user/register', formData).then(response => {
       console.log(response);
       console.log(response.data);
       if (response.statusText === 'OK') {
@@ -48,7 +48,7 @@ function App() {
     formData.append('reference', reference);
 
     // console.log(reference);
-    axios.post('http://localhost/php%20projects/Briefs/brief-appointment/manage_appointments/backend/public/appointment/view', formData).then(response => {
+    axios.post('http://localhost/php%20projects/react/manage_dental_appointments/backend/public/appointment/view', formData).then(response => {
       console.log(response.data);
       // console.log(response.data);
       if (response.statusText === 'OK') {
@@ -68,7 +68,7 @@ function App() {
   }
 
   const deleteBookingHandler = (id) => {
-    axios.delete('http://localhost/php%20projects/Briefs/brief-appointment/manage_appointments/backend/public/appointment/delete/'+id).then(response => {
+    axios.delete('http://localhost/php%20projects/react/manage_dental_appointments/backend/public/appointment/delete/'+id).then(response => {
       console.log(response);
       console.log(response.data);
       if (response.statusText === 'OK') {
@@ -96,6 +96,9 @@ function App() {
 
       <Route path='/register'>
         <Register onSaveDataUserForm={saveDataUserHandler} reference={userReference} />
+      </Route>
+      <Route exact path='*'>
+        <Home />
       </Route>
     </Switch>
 

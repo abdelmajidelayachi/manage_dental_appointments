@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import logo from '../assets/images/logo.png';
+
 function Footer() {
   return (
     <div className="bg-blueGray-800 ">
@@ -13,7 +15,7 @@ function Footer() {
               className="flex title-font font-medium items-center md:justify-start justify-center text-gray-200"
             >
               <img
-                src="http://localhost/php%20projects/Briefs/backend_dental-appointment/public/assets/images/logo.png"
+                src={logo}
                 alt="logo"
               />
             </Link>

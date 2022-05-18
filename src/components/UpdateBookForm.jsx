@@ -24,7 +24,7 @@ const UpdateBookForm=(props)=> {
     formData.append('date', date);
 
     console.log(date);
-    axios.post('http://localhost/php%20projects/Briefs/brief-appointment/manage_appointments/backend/public/appointment/getAllSlots', formData).then(response => {
+    axios.post('http://localhost/php%20projects/react/manage_dental_appointments/backend/public/appointment/getAllSlots', formData).then(response => {
       // console.log(response);
       // console.log(response.data);
       if (response.statusText === 'OK') {
@@ -118,7 +118,7 @@ const UpdateBookForm=(props)=> {
     console.log(props.onSaveReceivingDataBook.reference);
 
     
-    axios.post('http://localhost/php%20projects/Briefs/brief-appointment/manage_appointments/backend/public/appointment/update', formData).then(response => {
+    axios.post('http://localhost/php%20projects/react/manage_dental_appointments/backend/public/appointment/update', formData).then(response => {
       // console.log(response);
       console.log(response.data);
       if (response.statusText === 'OK') {

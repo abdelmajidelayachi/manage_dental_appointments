@@ -1,7 +1,8 @@
 /* eslint-disable react/style-prop-object */
 import React, { useRef, useState } from "react";
 import Nav from "../components/Nav";
-import "./Register.css";
+import cover from '../assets/images/doctor.svg';
+
 const Register = (props) => {
   const firstNameRef = useRef("");
   const lastNameRef = useRef("");
@@ -216,7 +217,7 @@ const Register = (props) => {
             <img
               alt="e-commerce"
               className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
-              src="http://localhost/php%20projects/Briefs/brief-appointment/manage_appointments/backend/public/assets/images/undraw_medicine.svg"
+              src={cover}
             />
           </div>
         </div>

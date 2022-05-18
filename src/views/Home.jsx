@@ -3,26 +3,27 @@ import { Link } from "react-router-dom";
 import Ads from "../components/Ads";
 import Footer from "../components/Footer";
 import Nav from '../components/Nav';
+import home1 from '../assets/images/header_img.jpg'
 // import image from "http://localhost/php%20projects/Briefs/backend_dental-appointment/public/assets/images/header_img.jpg";
 
 const Home = () => {
   return (
     <div>
-      <section className="text-gray-600 bg-blue-100 rounded-br-large body-font">
+      <section className="text-gray-600 bg-blue-100 md:rounded-br-large body-font">
   <div className="mx-auto flex pl-5 md:flex-row flex-col">
     <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start lg:items-start md:text-left mb-16 md:mb-0 ">
       <Nav /> 
       <div className="justify-center container">
-        <h1 className="title-font sm:text-4xl text-7xl mb-4 font-bold text-gray-900 text-center">Keep You smile </h1>
-        <h1 className="title-font sm:text-4xl text-7xl mb-4 font-bold text-gray-900 text-center">clean & great</h1>
+        <h1 className="title-font md:text-5xl text-3xl mb-4 font-bold text-gray-900 text-center">Keep You smile </h1>
+        <h1 className="title-font md:text-5xl text-3xl mb-4 font-bold text-gray-900 text-center">clean & great</h1>
         <p className="mb-8 leading-relaxed text-center">We will take care of your smile. come see us</p>
       </div>
       <div className="mx-auto mt-5 flex md:justify-start lg:justify-between">
         
-        <Link to="/register"><button className="inline-flex text-white bg-cyan-600 border-0 py-2 px-16 px-6 focus:outline-none hover:bg-cyan-500 rounded-full text-lg mr-8">Create account</button></Link>
-        <Link to="/checkAppointment"><button className="inline-flex text-white bg-cyan-600 border-0 py-2 px-16 px-6 focus:outline-none hover:bg-cyan-500 rounded-full text-lg ml-8">Check appointment</button></Link>
+        <Link to="/register"><button className="inline-flex text-white bg-cyan-600 border-0 py-2 md:text-xl px-6 focus:outline-none hover:bg-cyan-500 rounded-full text-sm md:mr-8 mr-3 ">Create account</button></Link>
+        <Link to="/checkAppointment"><button className="inline-flex text-white bg-cyan-600 border-0 py-2 md:text-xl px-6 focus:outline-none hover:bg-cyan-500 rounded-full text-sm md:mr-8 mr-3">Check appointment</button></Link>
       </div>
-      <div className="ml-auto mt-6">
+      <div className="ml-auto mt-6 md:flex md:flex-col hidden">
         <h2 className="title-font sm:text-1xl text-2xl mb-2 font-bold text-gray-900">12,134</h2>
         <p className="text-sm">5-Star reviews<br/> from satisfied customer</p>
         
@@ -38,8 +39,8 @@ const Home = () => {
     </div>
       
     </div>
-    <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-      <img className="object-cover object-center rounded-b-full" alt="hero" src="http://localhost/php%20projects/Briefs/brief-appointment/manage_appointments/backend/public/assets/images/header_img.jpg"/>
+    <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 md:flex hidden">
+      <img className="object-cover object-center rounded-b-full" alt="hero" src={home1}/>
     </div>
   </div>
 </section>

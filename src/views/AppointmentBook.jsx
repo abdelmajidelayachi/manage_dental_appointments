@@ -3,6 +3,7 @@ import { useState} from "react";
 import BookingForm from "../components/BookingForm";
 import Nav from "../components/Nav";
 import axios from "axios";
+import cover from '../assets/images/doctor.svg';
 
 
 function AppointmentBook(props) {
@@ -22,7 +23,7 @@ function AppointmentBook(props) {
   
 
     console.log(bookData);
-    axios.post('http://localhost/php%20projects/Briefs/brief-appointment/manage_appointments/backend/public/home/book', formData).then(response => {
+    axios.post('http://localhost/php%20projects/react/manage_dental_appointments/backend/public/home/book', formData).then(response => {
       console.log(response);
       console.log(response.data);
       if (response.statusText === 'OK') {
@@ -46,7 +47,7 @@ function AppointmentBook(props) {
     formData.append('date', date);
 
     console.log(date);
-    axios.post('http://localhost/php%20projects/Briefs/brief-appointment/manage_appointments/backend/public/appointment/getAllSlots', formData).then(response => {
+    axios.post('http://localhost/php%20projects/react/manage_dental_appointments/backend/public/appointment/getAllSlots', formData).then(response => {
       console.log(response);
       console.log(response.data);
       if (response.statusText === 'OK') {
@@ -81,7 +82,7 @@ function AppointmentBook(props) {
             <img
               alt="e-commerce"
               className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
-              src="http://localhost/php%20projects/Briefs/brief-appointment/manage_appointments/backend/public/assets/images/undraw_medicine.svg"
+              src={cover}
             />
           </div>
         </div>

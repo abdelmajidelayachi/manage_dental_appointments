@@ -54,7 +54,7 @@ function ViewAppointment(props) {
     
 
 
-   axios.get('http://localhost/php%20projects/Briefs/brief-appointment/manage_appointments/backend/public/appointment/getAppointment/'+bookingId).then((response)=>{
+   axios.get('http://localhost/php%20projects/react/manage_dental_appointments/backend/public/appointment/getAppointment/'+bookingId).then((response)=>{
     if (response.statusText === 'OK') {
       // console.log('this data : '+response.data);
       setBookingUpdatingData(response.data[0]);
